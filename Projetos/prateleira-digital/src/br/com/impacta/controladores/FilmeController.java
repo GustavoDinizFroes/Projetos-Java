@@ -1,19 +1,25 @@
 package br.com.impacta.controladores;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
+
 import br.com.impacta.persistencia.Filme;
 
 public class FilmeController {
 	
-	Filme galeria[] = new Filme[10];		
+	List<Filme> galeria = new ArrayList<Filme>();
 
 	//criar
-	public void criar(Filme filme){
-		galeria[Filme.contador-1]= filme; 
-		System.out.println(Filme.contador);
+	public void criar(Filme filme, DefaultTableModel modelo){
+		galeria.add(filme);
+		modelo.addRow(new Object[] {filme.titulo, filme.ano});
 		
-		for (int i = 0; i < galeria.length; i++) {
-			System.out.println(galeria[i]);
-		}
+//		for (Filme f : galeria) {
+//			System.out.println(f);
+//		}
+	System.out.println("O número de filmes criados é: " + galeria.size());
 	}
 	
 	//consultar
@@ -42,4 +48,5 @@ public class FilmeController {
 //		return filmes[0];
 		return null;
 	}
+
 }

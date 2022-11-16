@@ -1,5 +1,6 @@
-package br.com.impacta.testes;
+package br.com.impacta.apresentacao;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,12 +8,17 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import br.com.impacta.controladores.FilmeController;
 import br.com.impacta.persistencia.Filme;
 
-public class testeCriarFilme {
+public class TelaCriarFilme {
 
 	public static void main(String[] args) {
 		int margem1 = 100;
@@ -25,10 +31,22 @@ public class testeCriarFilme {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JButton botao = new JButton();
-		botao.setText("salvar");
+		botao.setText("Salvar");
 		botao.setSize(150, 40);
-		botao.setLocation(550, 450);
+		botao.setLocation(margem1, 350);
 		frame.add(botao);
+
+		JButton botaoDel = new JButton();
+		botaoDel.setText("Deletar");
+		botaoDel.setSize(150, 40);
+		botaoDel.setLocation(margem1, 400);
+		frame.add(botaoDel);
+
+		JButton botaoExtra = new JButton();
+		botaoExtra.setText("extra");
+		botaoExtra.setSize(150, 40);
+		botaoExtra.setLocation(margem1, 450);
+		frame.add(botaoExtra);
 
 		JLabel labeltopo = new JLabel("Gerenciamento de filmes");
 		labeltopo.setFont(new Font("Arial", Font.BOLD, 34));
@@ -99,6 +117,24 @@ public class testeCriarFilme {
 		caixaurl.setBounds(margem1, 300, 200, 30);
 		frame.add(caixaurl);
 
+		DefaultTableModel modelo = new DefaultTableModel();
+		JTable tabela = new JTable(modelo);
+		tabela.setBounds(570, 100, 200, 300);
+		tabela.setDefaultEditor(Object.class, null);
+
+		JPanel painel = new JPanel();
+		painel.setBounds(560, 100, 220, 320);
+		painel.setLayout(new BorderLayout());
+		painel.add(tabela.getTableHeader(), BorderLayout.NORTH);
+		painel.add(new JScrollPane(tabela));
+		frame.add(painel);
+
+		modelo.addColumn("Título");
+		modelo.addColumn("Ano");
+
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(50);
+		tabela.getColumnModel().getColumn(1).setPreferredWidth(50);
+
 		frame.setLayout(null);
 		frame.setVisible(true);
 
@@ -112,32 +148,63 @@ public class testeCriarFilme {
 				String generos = caixageneros.getText();
 				String votos = caixanumvotos.getText();
 				String url = caixaurl.getText();
-				
-				System.out.println("Titulo: " + titulo);
-				System.out.println("Diretores: " + diretores);
-				System.out.println("Nota: " + nota);
-				System.out.println("Duração: " + duracao);
-				System.out.println("Ano de lançamento: " + ano);
-				System.out.println("Gêneros: " + generos);
-				System.out.println("Número de votos: " + votos);
-				System.out.println("URL: " + url);
-				
+
+				// System.out.println("Titulo: " + titulo);
+				// System.out.println("Diretores: " + diretores);
+				// System.out.println("Nota: " + nota);
+				// System.out.println("Duração: " + duracao);
+				// System.out.println("Ano de lançamento: " + ano);
+				// System.out.println("Gêneros: " + generos);
+				// System.out.println("Número de votos: " + votos);
+				// System.out.println("URL: " + url);
+
 				Filme filme = new Filme();
 				filme.titulo = titulo;
 				filme.diretores = diretores;
-				filme.nota = Integer.parseInt(nota);
+				filme.nota = Double.parseDouble(nota);
 				filme.duracao = Integer.parseInt(duracao);
 				filme.ano = Integer.parseInt(ano);
 				filme.generos = generos;
 				filme.numVotos = Integer.parseInt(votos);
 				filme.url = url;
+
+				controller.criar(filme, modelo);
 				
-				controller.criar(filme);
-				
+				caixatitulo.setText("");
+				caixadiretores.setText("");
+				caixanota.setText("");
+				caixaduracao.setText("");
+				caixaano.setText("");
+				caixageneros.setText("");
+				caixanumvotos.setText("");
+				caixaurl.setText("");
 			}
-
 		});
-		
-	}
 
+		botaoDel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				int linhaSelecionada = tabela.getSelectedRow();
+				
+				if (linhaSelecionada>=0) {
+					modelo.removeRow(linhaSelecionada);
+				}	else {
+					JOptionPane.showMessageDialog(null,  "selecione alguma linha");
+				}
+			}
+		});
+
+		botaoExtra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				caixatitulo.setText("dawdawda");
+				caixadiretores.setText("dwadwa");
+				caixanota.setText("10");
+				caixaduracao.setText("200");
+				caixaano.setText("1990");
+				caixageneros.setText("dwadwa");
+				caixanumvotos.setText("2000");
+				caixaurl.setText("dwadwa");
+			}
+		});
+	}
 }
