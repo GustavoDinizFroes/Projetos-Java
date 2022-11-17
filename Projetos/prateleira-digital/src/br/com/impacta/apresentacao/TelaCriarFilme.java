@@ -140,6 +140,7 @@ public class TelaCriarFilme {
 
 		botao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				String titulo = caixatitulo.getText();
 				String diretores = caixadiretores.getText();
 				String nota = caixanota.getText();
@@ -169,7 +170,7 @@ public class TelaCriarFilme {
 				filme.url = url;
 
 				controller.criar(filme, modelo);
-				
+
 				caixatitulo.setText("");
 				caixadiretores.setText("");
 				caixanota.setText("");
@@ -183,13 +184,13 @@ public class TelaCriarFilme {
 
 		botaoDel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				int linhaSelecionada = tabela.getSelectedRow();
-				
-				if (linhaSelecionada>=0) {
+
+				if (linhaSelecionada >= 0) {
 					modelo.removeRow(linhaSelecionada);
-				}	else {
-					JOptionPane.showMessageDialog(null,  "selecione alguma linha");
+				} else {
+					JOptionPane.showMessageDialog(null, "selecione alguma linha");
 				}
 			}
 		});
