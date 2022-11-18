@@ -12,24 +12,24 @@ public class TesteConexao {
 	public static void main(String[] args) {
 
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_cadastro", "root", "Imp@ct@");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/prateleira_digital", "root", "Imp@ct@");
 			System.out.println("conectou aoaaoaooaoaoaoa");
 
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from tbfuncionarios");
-			
-			while(rs.next()) {
-				System.out.println(rs.getString("nome"));
-				System.out.println(rs.getString("cargo"));
+			ResultSet rs = stmt.executeQuery("select * from tb_filme");
+
+			while (rs.next()) {
+				System.out.println(rs.getString("titulo"));
+				System.out.println(rs.getInt("codigo"));
 			}
-		
-		con.close();
-		stmt.close();
-		rs.close();
-		
+
+			con.close();
+			stmt.close();
+			rs.close();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		
+
 		}
 	}
 }

@@ -12,10 +12,10 @@ public class TestesConstrutores {
 		f1.duracao = 120;
 
 		//Instanciar objeto usando construtor diferente do padrão
-		Filme f2 = new Filme("Star Wars", "diretor1, diretor2",9.9,120,1980, "suspense", 10, "https://www.site.com.br");
+		//Filme f2 = new Filme("Star Wars", "diretor1, diretor2",9.9,120,1980, "suspense", 10, "https://www.site.com.br");
 		
 		System.out.println(f1);
-		System.out.println(f2);
+		//System.out.println(f2);
 	}
 
 }

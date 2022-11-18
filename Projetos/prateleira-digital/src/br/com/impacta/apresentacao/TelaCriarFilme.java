@@ -4,6 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.lang.ModuleLayer.Controller;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import br.com.impacta.controladores.FilmeController;
@@ -20,7 +26,14 @@ import br.com.impacta.persistencia.Filme;
 
 public class TelaCriarFilme {
 
+	static FilmeController controller = new FilmeController();
+	static DefaultTableModel modelo = new DefaultTableModel();
+	static boolean ehNovo = true;
+
 	public static void main(String[] args) {
+
+		List galeria = controller.listar();
+
 		int margem1 = 100;
 		int margem2 = 40;
 		FilmeController controller = new FilmeController();
@@ -138,6 +151,8 @@ public class TelaCriarFilme {
 		frame.setLayout(null);
 		frame.setVisible(true);
 
+		popularTabela();
+
 		botao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -166,7 +181,7 @@ public class TelaCriarFilme {
 				filme.duracao = Integer.parseInt(duracao);
 				filme.ano = Integer.parseInt(ano);
 				filme.generos = generos;
-				filme.numVotos = Integer.parseInt(votos);
+				filme.Votos = Integer.parseInt(votos);
 				filme.url = url;
 
 				controller.criar(filme, modelo);
@@ -207,5 +222,63 @@ public class TelaCriarFilme {
 				caixaurl.setText("dwadwa");
 			}
 		});
+
+		labeltopo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				caixatitulo.setText("E o vento levou");
+				caixanumvotos.setText("10");
+				caixaduracao.setText("120");
+				caixaano.setText("2022");
+				caixanota.setText("10");
+				caixadiretores.setText("Diretor1 e Diretor2");
+				caixaurl.setText("http://www.eoventolevou.com.br");
+				caixageneros.setText("Romance");
+			}
+		});
+
+		tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent event) {
+				ehNovo = false;
+				int linha = tabela.getSelectedRow();
+				if (linha >= 0 && !event.getValueIsAdjusting()) {
+					String titulo = tabela.getValueAt(linha, 0).toString();
+
+					// objetivo = encontrar 1 filme no meio de vários
+					Filme filmeEscolhido = null;
+
+					for (Filme filme : controller.galeria) {
+						System.out.println(filme.titulo);
+
+						if (titulo.equals(filme.titulo)) {
+							filmeEscolhido = filme;
+							break;
+						}
+					}
+
+					caixatitulo.setText(filmeEscolhido.titulo);
+					caixanumvotos.setText("" + filmeEscolhido.Votos);
+					caixaduracao.setText("" + filmeEscolhido.duracao);
+					caixaano.setText("" + filmeEscolhido.ano);
+					caixanota.setText("" + filmeEscolhido.nota);
+					caixadiretores.setText(filmeEscolhido.diretores);
+					caixaurl.setText(filmeEscolhido.url);
+					caixageneros.setText(filmeEscolhido.generos);
+
+				}
+			}
+		});
+
+	}
+
+	static void popularTabela() {
+		
+		List<Filme> galeria = controller.listar();
+
+		for (Filme filme : galeria) {
+			// adicionar o filme na tabela
+			modelo.addRow(new Object[] { filme.titulo, filme.ano });
+		}
+
 	}
 }

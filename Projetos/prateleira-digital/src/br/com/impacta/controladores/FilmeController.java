@@ -6,47 +6,54 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import br.com.impacta.persistencia.Filme;
+import br.com.impacta.persistencia.FilmeDAO;
 
 public class FilmeController {
-	
-	List<Filme> galeria = new ArrayList<Filme>();
 
-	//criar
-	public void criar(Filme filme, DefaultTableModel modelo){
+	public List<Filme> galeria = new ArrayList<Filme>();
+
+	// criar
+	public void criar(Filme filme, DefaultTableModel modelo) {
 		galeria.add(filme);
-		modelo.addRow(new Object[] {filme.titulo, filme.ano});
-		
-//		for (Filme f : galeria) {
-//			System.out.println(f);
-//		}
-	System.out.println("O número de filmes criados é: " + galeria.size());
+		modelo.addRow(new Object[] { filme.titulo, filme.ano });
+
+		// for (Filme f : galeria) {
+		// System.out.println(f);
+		// }
+
+		System.out.println("O número de filmes criados é: " + galeria.size());
 	}
-	
-	//consultar
-	Filme[] consultar(String titulo){
-		//TODO: implementar
+
+	// consultar
+	public Filme[] consultar(String titulo) {
+		// TODO: implementar
 		return null;
 	}
-	
-	//importar
-	int importar(String url){
-		//TODO: implementar
+
+	// importar
+	public int importar(String url) {
+		// TODO: implementar
 		return 0;
 	}
-	
-	//remover
-	boolean remover(String titulo){
-		//TODO: implementar
+
+	// remover
+	public boolean remover(String titulo) {
+		// TODO: implementar
 		return false;
 	}
-	
-	//sortear
-	Filme sortear(String genero){
-		//TODO: implementar
-//		Filme []filmes = {}; //500
-//		int posicao = (int) (Math.random() * 500);
-//		return filmes[0];
+
+	// sortear
+	public Filme sortear(String genero) {
+		// TODO: implementar
+		// Filme []filmes = {}; //500
+		// int posicao = (int) (Math.random() * 500);
+		// return filmes[0];
 		return null;
 	}
 
+	public List listar() {
+		FilmeDAO dao = new FilmeDAO();
+		List retorno = dao.listar();
+		return retorno;
+	}
 }
