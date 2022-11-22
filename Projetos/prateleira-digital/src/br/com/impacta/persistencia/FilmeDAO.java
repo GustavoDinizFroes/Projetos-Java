@@ -2,6 +2,7 @@ package br.com.impacta.persistencia;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,57 +10,81 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FilmeDAO {
-	// criar (c)
-	public void criar(Filme filme) {
-	}
-
-	// listar (R)
-	public List listar() {
-
-		List<Filme> galeria = new ArrayList();
-
+	
+	List<Filme> galeria = new ArrayList();
+	
+	//criar (C)
+	public void criar(Filme filme){
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/prateleira_digital", "root",
-					"Imp@ct@");
-			System.out.println("conectou aoaaoaooaoaoaoa");
-
+			Connection con = DriverManager.getConnection("jdbc:mysql://172.16.23.9:3306/prateleira_digital", "root", "Imp@ct@");
+			System.out.println("Conectou aoaoaooa!");
+			
+			String sql = "INSERT INTO tb_filme (titulo, ano) VALUES(?, ?)";
+			
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, filme.titulo);
+			pstmt.setInt(2, filme.ano);			
+			
+			pstmt.executeUpdate();
+		
+		
+			con.close();
+			pstmt.close();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	//listar (R)
+	public List<Filme> listar(){
+		try {
+			Connection con = DriverManager.getConnection("jdbc:mysql://172.16.23.9:3306/prateleira_digital", "root", "Imp@ct@");
+			System.out.println("Conectado com sucesso!");
+			
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from tb_filme");
-
-			while (rs.next()) {
+			ResultSet rs = stmt.executeQuery("select * from tb_filme;");			
+			while(rs.next()) {
 				Filme filme = new Filme();
-				filme.titulo = rs.getString("titulo");
 				filme.codigo = rs.getInt("codigo");
-				filme.diretores = rs.getString("diretores");
-				filme.nota = rs.getDouble("nota");
-				filme.duracao = rs.getInt("duracao");
-				filme.ano = rs.getInt("ano");
+				filme.titulo = rs.getString("titulo");
 				filme.generos = rs.getString("generos");
-				filme.Votos = rs.getInt("votos");
+				filme.diretores = rs.getString("diretores");
 				filme.url = rs.getString("url");
+				filme.votos = rs.getInt("votos");
+				filme.nota = rs.getDouble("nota");
+				filme.ano = rs.getInt("ano");
+				filme.duracao = rs.getInt("duracao");
 
 				galeria.add(filme);
 			}
-
+			
 			con.close();
 			stmt.close();
 			rs.close();
-
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
-
-		}
+			e.printStackTrace(); 
+		} 
 		return galeria;
 	}
-
-	// atualiza
-	public void atualizar() {
-
+	
+	//atualizar (U)
+	public void atualizar(Filme filme) {
+		
 	}
-
-	// remover
+	
+	//remover (D)
 	public void remover(int codigo) {
-
+		try {
+			Connection con = DriverManager.getConnection("jdbc:mysql://172.16.23.9:3306/prateleira_digital", "root", "Imp@ct@");
+			System.out.println("Conectado com sucesso!");
+			
+			Statement stmt = con.createStatement();
+			stmt.execute("delete  from tb_filme where codigo = " + codigo);
+		} catch (SQLException e) {
+			e.printStackTrace(); 
+		} 
 	}
-
 }

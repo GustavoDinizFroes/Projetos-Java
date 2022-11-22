@@ -1,14 +1,15 @@
 package br.com.impacta.apresentacao;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.lang.ModuleLayer.Controller;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +17,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -31,254 +34,272 @@ public class TelaCriarFilme {
 	static boolean ehNovo = true;
 
 	public static void main(String[] args) {
-
-		List galeria = controller.listar();
-
 		int margem1 = 100;
-		int margem2 = 40;
-		FilmeController controller = new FilmeController();
-
-		JFrame frame = new JFrame("Cadastrar Filme:");
+		
+		JFrame frame = new JFrame();
 		frame.setSize(800, 600);
+		
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		JButton botao = new JButton();
-		botao.setText("Salvar");
-		botao.setSize(150, 40);
-		botao.setLocation(margem1, 350);
-		frame.add(botao);
-
-		JButton botaoDel = new JButton();
-		botaoDel.setText("Deletar");
-		botaoDel.setSize(150, 40);
-		botaoDel.setLocation(margem1, 400);
-		frame.add(botaoDel);
-
-		JButton botaoExtra = new JButton();
-		botaoExtra.setText("extra");
-		botaoExtra.setSize(150, 40);
-		botaoExtra.setLocation(margem1, 450);
-		frame.add(botaoExtra);
-
-		JLabel labeltopo = new JLabel("Gerenciamento de filmes");
-		labeltopo.setFont(new Font("Arial", Font.BOLD, 34));
-		labeltopo.setBounds(188, 5, 500, 50);
-		frame.add(labeltopo);
-
-		JLabel labeltitulo = new JLabel("Título:");
-		labeltitulo.setBounds(margem2, 100, 100, 30);
-		frame.add(labeltitulo);
-
-		JTextField caixatitulo = new JTextField(20);
-		caixatitulo.setBounds(margem1, 100, 200, 30);
-		frame.add(caixatitulo);
-
-		JLabel labeldiretores = new JLabel("Diretores:");
-		labeldiretores.setBounds(margem2, 150, 100, 30);
-		frame.add(labeldiretores);
-
-		JTextField caixadiretores = new JTextField(20);
-		caixadiretores.setBounds(margem1, 150, 200, 30);
-		frame.add(caixadiretores);
-
-		JLabel labelnota = new JLabel("Nota:");
-		labelnota.setBounds(margem2, 200, 200, 30);
-		frame.add(labelnota);
-
-		JTextField caixanota = new JTextField(20);
-		caixanota.setBounds(margem1, 200, 50, 30);
-		frame.add(caixanota);
-
-		JLabel labelduracao = new JLabel("Duração:");
-		labelduracao.setBounds(270, 200, 200, 30);
-		frame.add(labelduracao);
-
-		JTextField caixaduracao = new JTextField(20);
-		caixaduracao.setBounds(325, 200, 50, 30);
-		frame.add(caixaduracao);
-
-		JLabel labelano = new JLabel("Ano:");
-		labelano.setBounds(170, 200, 200, 30);
-		frame.add(labelano);
-
-		JTextField caixaano = new JTextField(20);
-		caixaano.setBounds(200, 200, 50, 30);
-		frame.add(caixaano);
-
-		JLabel labelgeneros = new JLabel("Gêneros:");
-		labelgeneros.setBounds(margem2, 250, 200, 30);
-		frame.add(labelgeneros);
-
-		JTextField caixageneros = new JTextField(20);
-		caixageneros.setBounds(margem1, 250, 200, 30);
-		frame.add(caixageneros);
-
-		JLabel labelnumvotos = new JLabel("Num. de votos:");
-		labelnumvotos.setBounds(400, 200, 200, 30);
-		frame.add(labelnumvotos);
-
-		JTextField caixanumvotos = new JTextField(20);
-		caixanumvotos.setBounds(490, 200, 50, 30);
-		frame.add(caixanumvotos);
-
-		JLabel labelurl = new JLabel("URL:");
-		labelurl.setBounds(margem2, 300, 200, 30);
-		frame.add(labelurl);
-
-		JTextField caixaurl = new JTextField(20);
-		caixaurl.setBounds(margem1, 300, 200, 30);
-		frame.add(caixaurl);
-
-		DefaultTableModel modelo = new DefaultTableModel();
+		frame.setLayout(null);
+		
+		
+		JButton botaoSalvar = new JButton();
+		botaoSalvar.setText("Salvar");
+		botaoSalvar.setSize(150, 40);
+		botaoSalvar.setLocation(margem1, 450);
+		frame.add(botaoSalvar);
+		
+		JButton botaoExcluir = new JButton();
+		botaoExcluir.setText("Excluir");
+		botaoExcluir.setSize(150, 40);
+		botaoExcluir.setLocation(270, 450);
+		frame.add(botaoExcluir);
+		
+		JButton botaoLimpar = new JButton();
+		botaoLimpar.setText("Limpar");
+		botaoLimpar.setSize(150, 40);
+		botaoLimpar.setLocation(440, 450);
+		frame.add(botaoLimpar);
+		
+		JLabel labelTopo = new JLabel("Gerenciamento de filmes");
+		labelTopo.setFont(new Font("Arial", Font.BOLD, 34));
+		labelTopo.setBounds(188, 5, 500, 50);
+		frame.add(labelTopo);
+		
+		
+		//titulo
+		JLabel labelTitulo = new JLabel("Título:");
+		labelTitulo.setBounds(50, 100, 100, 30);
+		JTextField caixaTitulo = new JTextField(20);
+		caixaTitulo.setBounds(margem1, 100, 200, 30);	
+		frame.add(labelTitulo);
+		frame.add(caixaTitulo);
+		
+	
+		//diretores
+		JLabel labelDiretores = new JLabel("Diretores:");
+		labelDiretores.setBounds(50-10, 150, 100, 30);
+		JTextField caixaDiretores = new JTextField(20);
+		caixaDiretores.setBounds(margem1, 150, 200, 30);	
+		frame.add(labelDiretores);
+		frame.add(caixaDiretores);
+		
+		//ano (1)
+		JLabel labelAno = new JLabel("Ano:");
+		labelAno.setBounds(50, 200, 100, 30);
+		JTextField caixaAno = new JTextField(2);
+		caixaAno.setBounds(100, 200, 50, 30);	
+		frame.add(labelAno);
+		frame.add(caixaAno);
+		
+		//duracao (2)
+		JLabel labelDuracao = new JLabel("Duração:");
+		labelDuracao.setBounds(170, 200, 100, 30);
+		JTextField caixaDuracao = new JTextField(2);
+		caixaDuracao.setBounds(250, 200, 50, 30);	
+		frame.add(labelDuracao);
+		frame.add(caixaDuracao);
+		
+		//voto (3)
+		JLabel labelVoto = new JLabel("Voto:");
+		labelVoto.setBounds(320, 200, 100, 30);
+		JTextField caixaVoto = new JTextField(2);
+		caixaVoto.setBounds(370, 200, 50, 30);	
+		frame.add(labelVoto);
+		frame.add(caixaVoto);
+		
+		//nota (4)
+		JLabel labelNota = new JLabel("Nota:");
+		labelNota.setBounds(440, 200, 100, 30);
+		JTextField caixaNota = new JTextField(2);
+		caixaNota.setBounds(490, 200, 50, 30);
+		frame.add(labelNota);
+		frame.add(caixaNota);
+		
+		//url
+		JLabel labelUrl = new JLabel("URL:");
+		labelUrl.setBounds(50, 250, 100, 30);
+		JTextField caixaUrl = new JTextField();
+		caixaUrl.setBounds(margem1, 250, 200, 30);
+		frame.add(labelUrl);
+		frame.add(caixaUrl);
+		
+		//Generos
+		JLabel labelGeneros = new JLabel("Generos:");
+		labelGeneros.setBounds(50-10, 300, 100, 30);
+		JTextArea caixaGeneros = new JTextArea();
+		caixaGeneros.setBounds(margem1, 300, 200, 100);
+		frame.add(labelGeneros);
+		frame.add(caixaGeneros);
+		Border border = BorderFactory.createLineBorder(Color.GRAY);
+		caixaGeneros.setBorder(BorderFactory.createCompoundBorder(border,
+	            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+	    
+		
+		//Tabela
+		
 		JTable tabela = new JTable(modelo);
-		tabela.setBounds(570, 100, 200, 300);
+		tabela.setBounds(570, 100, 100, 300);
 		tabela.setDefaultEditor(Object.class, null);
-
-		JPanel painel = new JPanel();
-		painel.setBounds(560, 100, 220, 320);
+		
+		JPanel painel = new JPanel() ;
+		painel.setBounds(560, 100, 220, 320);	
 		painel.setLayout(new BorderLayout());
 		painel.add(tabela.getTableHeader(), BorderLayout.NORTH);
 		painel.add(new JScrollPane(tabela));
 		frame.add(painel);
-
-		modelo.addColumn("Título");
+		
+		modelo.addColumn("Codigo");
+		modelo.addColumn("Titulo");
 		modelo.addColumn("Ano");
 
-		tabela.getColumnModel().getColumn(0).setPreferredWidth(50);
-		tabela.getColumnModel().getColumn(1).setPreferredWidth(50);
-
-		frame.setLayout(null);
+		tabela.getColumnModel().getColumn(0)
+		.setPreferredWidth(50);
+		tabela.getColumnModel().getColumn(1)
+		.setPreferredWidth(50);	
+		
 		frame.setVisible(true);
-
+		
+		//popular tabela com dados fake
 		popularTabela();
-
-		botao.addActionListener(new ActionListener() {
+		
+		//acoes
+		botaoSalvar.addActionListener(new ActionListener() {
+			
+			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				String titulo = caixatitulo.getText();
-				String diretores = caixadiretores.getText();
-				String nota = caixanota.getText();
-				String duracao = caixaduracao.getText();
-				String ano = caixaano.getText();
-				String generos = caixageneros.getText();
-				String votos = caixanumvotos.getText();
-				String url = caixaurl.getText();
-
-				// System.out.println("Titulo: " + titulo);
-				// System.out.println("Diretores: " + diretores);
-				// System.out.println("Nota: " + nota);
-				// System.out.println("Duração: " + duracao);
-				// System.out.println("Ano de lançamento: " + ano);
-				// System.out.println("Gêneros: " + generos);
-				// System.out.println("Número de votos: " + votos);
-				// System.out.println("URL: " + url);
-
+				String stringTitulo = caixaTitulo.getText();
+				String stringGeneros = caixaGeneros.getText();
+				String stringNota = caixaNota.getText();
+				String stringDiretores = caixaDiretores.getText();
+				String stringAno = caixaAno.getText();
+				String stringDuracao = caixaDuracao.getText();
+				String stringVoto = caixaVoto.getText();
+				String stringUrl = caixaUrl.getText();
+				
 				Filme filme = new Filme();
-				filme.titulo = titulo;
-				filme.diretores = diretores;
-				filme.nota = Double.parseDouble(nota);
-				filme.duracao = Integer.parseInt(duracao);
-				filme.ano = Integer.parseInt(ano);
-				filme.generos = generos;
-				filme.Votos = Integer.parseInt(votos);
-				filme.url = url;
-
-				controller.criar(filme, modelo);
-
-				caixatitulo.setText("");
-				caixadiretores.setText("");
-				caixanota.setText("");
-				caixaduracao.setText("");
-				caixaano.setText("");
-				caixageneros.setText("");
-				caixanumvotos.setText("");
-				caixaurl.setText("");
+				filme.titulo = stringTitulo;
+				filme.ano = Integer.parseInt(stringAno);
+				filme.generos = stringGeneros;
+				filme.nota = Double.parseDouble(stringNota);
+				filme.diretores = stringDiretores;
+				filme.duracao = Integer.parseInt(stringDuracao);
+				filme.votos = Integer.parseInt(stringVoto);
+				filme.url = stringUrl;				
+				
+				if (ehNovo) {
+					controller.criar(filme);	
+					modelo.addRow(new Object[] { " ",  filme.titulo, filme.ano}); 
+				} else {
+					int linhaSelecionada = tabela.getSelectedRow();
+					modelo.removeRow(linhaSelecionada);
+					ehNovo = true;
+					
+					controller.criar(filme);	
+					modelo.addRow(new Object[] { filme.titulo, filme.ano}); 
+				}
+				
+				caixaTitulo.setText("");	
+				caixaVoto.setText("");
+				caixaDuracao.setText("");
+				caixaAno.setText("");
+				caixaNota.setText("");			
+				caixaDiretores.setText("");			
+				caixaUrl.setText("");			
+				caixaGeneros.setText("");
 			}
 		});
 
-		botaoDel.addActionListener(new ActionListener() {
+		botaoExcluir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				int linhaSelecionada = tabela.getSelectedRow();
-
-				if (linhaSelecionada >= 0) {
+				Object celula = tabela.getValueAt(linhaSelecionada, 0);
+				String codigoEmTexto = celula.toString();
+				int codigoEmInteiro =Integer.parseInt(codigoEmTexto);
+				
+				if(linhaSelecionada>=0) {
+					System.out.println(linhaSelecionada);
 					modelo.removeRow(linhaSelecionada);
-				} else {
-					JOptionPane.showMessageDialog(null, "selecione alguma linha");
+					controller.remover(codigoEmInteiro);
+				}else {
+					JOptionPane.showMessageDialog(null, "selecione algum item");
 				}
 			}
 		});
-
-		botaoExtra.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				caixatitulo.setText("dawdawda");
-				caixadiretores.setText("dwadwa");
-				caixanota.setText("10");
-				caixaduracao.setText("200");
-				caixaano.setText("1990");
-				caixageneros.setText("dwadwa");
-				caixanumvotos.setText("2000");
-				caixaurl.setText("dwadwa");
-			}
-		});
-
-		labeltopo.addMouseListener(new MouseAdapter() {
+		
+		botaoLimpar.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				caixatitulo.setText("E o vento levou");
-				caixanumvotos.setText("10");
-				caixaduracao.setText("120");
-				caixaano.setText("2022");
-				caixanota.setText("10");
-				caixadiretores.setText("Diretor1 e Diretor2");
-				caixaurl.setText("http://www.eoventolevou.com.br");
-				caixageneros.setText("Romance");
+			public void actionPerformed(ActionEvent e) {				
+				caixaTitulo.setText("");			
+				caixaVoto.setText("");
+				caixaDuracao.setText("");
+				caixaAno.setText("");
+				caixaNota.setText("");			
+				caixaDiretores.setText("");			
+				caixaUrl.setText("");			
+				caixaGeneros.setText("");
 			}
 		});
-
+		
+		labelTopo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent  e) {				
+				caixaTitulo.setText("E o vento levou");			
+				caixaVoto.setText("10");
+				caixaDuracao.setText("120");
+				caixaAno.setText("2022");
+				caixaNota.setText("10");			
+				caixaDiretores.setText("Diretor1 e Diretor2");			
+				caixaUrl.setText("http://www.eoventolevou.com.br");			
+				caixaGeneros.setText("Romance");
+			}
+		});
+		
 		tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent event) {
-				ehNovo = false;
-				int linha = tabela.getSelectedRow();
-				if (linha >= 0 && !event.getValueIsAdjusting()) {
-					String titulo = tabela.getValueAt(linha, 0).toString();
-
-					// objetivo = encontrar 1 filme no meio de vários
+		    @Override
+		    public void valueChanged(ListSelectionEvent event) {
+		    	ehNovo = false;
+	        	int linha = tabela.getSelectedRow();
+	        	if(linha>=0 && !event.getValueIsAdjusting() ) {
+					int codigo =Integer.parseInt(tabela.getValueAt(linha, 0).toString());
+					
+					
+					//objetivo = encontrar 1 filme no meio de vários
 					Filme filmeEscolhido = null;
-
-					for (Filme filme : controller.galeria) {
+					
+					for (Filme filme : controller.listar()) {
 						System.out.println(filme.titulo);
-
-						if (titulo.equals(filme.titulo)) {
+						
+						if(codigo == filme.codigo) {
 							filmeEscolhido = filme;
 							break;
 						}
 					}
-
-					caixatitulo.setText(filmeEscolhido.titulo);
-					caixanumvotos.setText("" + filmeEscolhido.Votos);
-					caixaduracao.setText("" + filmeEscolhido.duracao);
-					caixaano.setText("" + filmeEscolhido.ano);
-					caixanota.setText("" + filmeEscolhido.nota);
-					caixadiretores.setText(filmeEscolhido.diretores);
-					caixaurl.setText(filmeEscolhido.url);
-					caixageneros.setText(filmeEscolhido.generos);
-
-				}
-			}
+					
+					caixaTitulo.setText(filmeEscolhido.titulo);			
+					caixaVoto.setText(""+filmeEscolhido.votos);
+					caixaDuracao.setText(""+filmeEscolhido.duracao);
+					caixaAno.setText(""+filmeEscolhido.ano);
+					caixaNota.setText(""+filmeEscolhido.nota);			
+					caixaDiretores.setText(filmeEscolhido.diretores);			
+					caixaUrl.setText(filmeEscolhido.url);			
+					caixaGeneros.setText(filmeEscolhido.generos);
+					
+	        	}
+		    }
 		});
 
 	}
-
-	static void popularTabela() {
-		
+	
+	static void popularTabela(){
 		List<Filme> galeria = controller.listar();
-
-		for (Filme filme : galeria) {
-			// adicionar o filme na tabela
-			modelo.addRow(new Object[] { filme.titulo, filme.ano });
+		
+		for(Filme filme : galeria) {
+			//adicionar o filme na tabela
+			modelo.addRow(new Object[] {filme.codigo, filme.titulo, filme.ano}); 
 		}
-
 	}
+
 }

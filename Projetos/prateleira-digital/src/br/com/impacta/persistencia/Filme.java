@@ -9,14 +9,14 @@ public class Filme {
 	public int duracao;
 	public int ano;
 	public String generos;
-	public int Votos;
+	public int votos;
 	public String url;
-
+	
 	@Override
 	public String toString() {
 		return "Filme [codigo=" + codigo + ", titulo=" + titulo + ", diretores=" + diretores + ", nota=" + nota
-				+ ", duracao=" + duracao + ", ano=" + ano + ", generos=" + generos + ", numVotos=" + Votos + ", url="
+				+ ", duracao=" + duracao + ", ano=" + ano + ", generos=" + generos + ", numVotos=" + votos + ", url="
 				+ url + "]";
 	}
-
+	
 }
