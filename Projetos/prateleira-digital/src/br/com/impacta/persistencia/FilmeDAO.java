@@ -19,12 +19,18 @@ public class FilmeDAO {
 			Connection con = DriverManager.getConnection("jdbc:mysql://172.16.23.9:3306/prateleira_digital", "root", "Imp@ct@");
 			System.out.println("Conectou aoaoaooa!");
 			
-			String sql = "INSERT INTO tb_filme (titulo, ano) VALUES(?, ?)";
+			String sql = "INSERT INTO tb_filme (titulo, ano, generos, nota, duracao, votos, diretores, url) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, filme.titulo);
-			pstmt.setInt(2, filme.ano);			
+			pstmt.setInt(2, filme.ano);	
+			pstmt.setString(3, filme.generos);	
+			pstmt.setDouble(4, filme.nota);	
+			pstmt.setInt(5, filme.duracao);	
+			pstmt.setInt(6, filme.votos);	
+			pstmt.setString(7, filme.diretores);	
+			pstmt.setString(8, filme.url);
 			
 			pstmt.executeUpdate();
 		
@@ -74,6 +80,7 @@ public class FilmeDAO {
 	public void atualizar(Filme filme) {
 		
 	}
+	
 	
 	//remover (D)
 	public void remover(int codigo) {
