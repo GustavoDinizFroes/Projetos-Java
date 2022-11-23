@@ -13,7 +13,7 @@ public class FilmeController {
 	//criar
 	public void criar(Filme filme){
 		FilmeDAO dao = new FilmeDAO();
-		dao.criar(filme);		
+		dao.criar(filme);
 	}
 	
 	//consultar
@@ -48,5 +48,12 @@ public class FilmeController {
 		FilmeDAO dao = new FilmeDAO();
 		List<Filme> retorno = dao.listar();
 		return retorno;
+		
 	}
+	
+		//criar
+		public void atualizar(Filme filme){
+			FilmeDAO dao = new FilmeDAO();
+			dao.atualizar(filme);
+		}
 }

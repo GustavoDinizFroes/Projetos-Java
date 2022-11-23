@@ -23,14 +23,14 @@ public class FilmeDAO {
 			
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, filme.titulo);
-			pstmt.setInt(2, filme.ano);	
-			pstmt.setString(3, filme.generos);	
-			pstmt.setDouble(4, filme.nota);	
-			pstmt.setInt(5, filme.duracao);	
-			pstmt.setInt(6, filme.votos);	
-			pstmt.setString(7, filme.diretores);	
-			pstmt.setString(8, filme.url);
+			pstmt.setString(1, filme.getTitulo());
+			pstmt.setInt(2, filme.getAno());	
+			pstmt.setString(3, filme.getGeneros());	
+			pstmt.setDouble(4, filme.getNota());	
+			pstmt.setInt(5, filme.getDuracao());	
+			pstmt.setInt(6, filme.getVotos());	
+			pstmt.setString(7, filme.getDiretores());	
+			pstmt.setString(8, filme.getUrl());
 			
 			pstmt.executeUpdate();
 		
@@ -53,15 +53,15 @@ public class FilmeDAO {
 			ResultSet rs = stmt.executeQuery("select * from tb_filme;");			
 			while(rs.next()) {
 				Filme filme = new Filme();
-				filme.codigo = rs.getInt("codigo");
-				filme.titulo = rs.getString("titulo");
-				filme.generos = rs.getString("generos");
-				filme.diretores = rs.getString("diretores");
-				filme.url = rs.getString("url");
-				filme.votos = rs.getInt("votos");
-				filme.nota = rs.getDouble("nota");
-				filme.ano = rs.getInt("ano");
-				filme.duracao = rs.getInt("duracao");
+				filme.setCodigo(rs.getInt("codigo"));
+				filme.setTitulo(rs.getString("titulo"));
+				filme.setGeneros(rs.getString("generos"));
+				filme.setDiretores(rs.getString("diretores"));
+				filme.setUrl(rs.getString("url"));
+				filme.setVotos(rs.getInt("votos"));
+				filme.setNota(rs.getDouble("nota"));
+				filme.setAno(rs.getInt("ano"));
+				filme.setDuracao(rs.getInt("duracao"));
 
 				galeria.add(filme);
 			}
