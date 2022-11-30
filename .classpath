@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="Projetos/prateleira-digital/src"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_03"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_04"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_05"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_06/Cap6_Lab1"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_06/Cap6_Lab2"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_06/Cap6_Lab3"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_07"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_08"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_09"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_10"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_11"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_14"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_15"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_16"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_17"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/Laboratórios/Cap_19"/>
+	<classpathentry kind="src" path="Projetos/treinamento-java-programmer/prateleira-digital/src"/>
+	<classpathentry kind="lib" path="Projetos/prateleira-digital/meu-virus.jar"/>
+	<classpathentry kind="output" path="Projetos/prateleira-digital/bin"/>
+</classpath>
